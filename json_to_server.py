@@ -42,8 +42,13 @@ class MainRest(Resource):
             Example: http httpbin.org/post user:='{"name": "john", "age": 10 }
         """
 
-        db[]
-
+        json_data = request.get_json(force=True)
+        if json_data is not None:
+            key = list(json_data.keys())[0]
+            db[key] = json_data[key]
+            return 201
+        else:
+            return 500
 
 class TableRest(Resource):
     def get(self, key):
