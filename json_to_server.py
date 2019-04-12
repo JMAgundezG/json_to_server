@@ -84,10 +84,11 @@ class TableRest(Resource):
             if type(data) == dict:
                 if len(db[key]) == 0: 
                     db[key].append(data)
-                    return "[INFO] ACCEPTED"201
+                    return "[INFO] ACCEPTED", 201
                 elif data.keys() == db[key][0].keys():
                     if len(list(filter(lambda x: x["id"] == data["id"], db[key]))) == 0:
                         db[key].append(data)
+                        return "[INFO] ACCEPTED", 201
                 else:
                     return "[ERROR] WRONG COLUMNS FOR THAT TABLE", 403 
             else:
